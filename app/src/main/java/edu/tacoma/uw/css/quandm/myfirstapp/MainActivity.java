@@ -3,23 +3,31 @@ package edu.tacoma.uw.css.quandm.myfirstapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "edu.tacoma.uw.css.quandm.myfirstapp.MESSAGE";
+    public static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.e(TAG, "onCreate");
     }
 
-    /**Makes the activity visible to the user
+
+
+    /**Called from user tap of the Send button
+     * Makes the activity visible to the user
      * We may register a BroadcastReceiver here
      * Once callback finishes the system invokes onResume()*/
     @Override public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart");
     }
 
     /**State in which the app interacts with the user
@@ -29,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override public void onResume() {
         super.onResume();
 
+        Log.i(TAG, "onResume");
     }
 
     /**Called whenever user leaves an activity
@@ -36,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
      * If activity visibility reduces to invisible then onStop() is invoked*/
     @Override public void onPause() {
         super.onPause();
+        Log.w(TAG, "onPause");
     }
 
     /**Activity is no longer visible or is completed running and is about to terminate
@@ -43,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
      * Perform CPU intensive shutdown operations here*/
     @Override public void onStop() {
         super.onStop();
+        Log.v(TAG, "onStop");
     }
 
     /**Final call that an activity receives
@@ -51,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
      * Orientation changes also call this method then onCreate() to recreate the process*/
     @Override public void onDestroy() {
         super.onDestroy();
+        Log.e(TAG, "onDestroy");
     }
 
-    /**Called from user tap of the Send button*/
+    /**creates intent to move to the DisplayMessageActivity
+     * Binds the intended data with the intent for the next activity to use*/
     public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.editText);
